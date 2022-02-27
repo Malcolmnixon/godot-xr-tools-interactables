@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/godot-xr-tools/interactables/xrt_interactable_hinge.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/wahooney.itch.io/white_grid.png" type="Texture" id=2]
+[ext_resource path="res://addons/godot-xr-tools/interactables/xrt_interactable_handle.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.2
+height = 0.02
+
+[sub_resource type="CylinderMesh" id=2]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.02
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 2 )
+uv1_triplanar = true
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.01, 0.04, 0.05 )
+
+[node name="Wheel" type="Spatial"]
+
+[node name="HingeOrigin" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+
+[node name="InteractableHinge" parent="HingeOrigin" instance=ExtResource( 1 )]
+hinge_limit_min = -360.0
+hinge_limit_max = 360.0
+
+[node name="WheelBody" type="StaticBody" parent="HingeOrigin/InteractableHinge"]
+
+[node name="WheelShape" type="CollisionShape" parent="HingeOrigin/InteractableHinge/WheelBody"]
+transform = Transform( -4.37114e-08, 1, 4.37114e-08, -1, -4.37114e-08, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="WheelMesh" type="MeshInstance" parent="HingeOrigin/InteractableHinge/WheelBody"]
+transform = Transform( -4.37114e-08, 1, 4.37114e-08, -1, -4.37114e-08, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="Handle1" type="Spatial" parent="HingeOrigin/InteractableHinge"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+
+[node name="InteractableHandle" parent="HingeOrigin/InteractableHinge/Handle1" instance=ExtResource( 3 )]
+highlight_mesh_instance = null
+
+[node name="CollisionShape" type="CollisionShape" parent="HingeOrigin/InteractableHinge/Handle1/InteractableHandle"]
+shape = SubResource( 4 )
+
+[node name="Handle2" type="Spatial" parent="HingeOrigin/InteractableHinge"]
+transform = Transform( 1, -3.09086e-08, -1.28028e-08, 3.09086e-08, 0.707107, 0.707107, -1.28028e-08, -0.707107, 0.707107, 0, 0.141, -0.141 )
+
+[node name="InteractableHandle" parent="HingeOrigin/InteractableHinge/Handle2" instance=ExtResource( 3 )]
+highlight_mesh_instance = null
+
+[node name="CollisionShape" type="CollisionShape" parent="HingeOrigin/InteractableHinge/Handle2/InteractableHandle"]
+shape = SubResource( 4 )
+
+[node name="Handle3" type="Spatial" parent="HingeOrigin/InteractableHinge"]
+transform = Transform( 1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -8.74228e-09, 0, -0.2 )
+
+[node name="InteractableHandle" parent="HingeOrigin/InteractableHinge/Handle3" instance=ExtResource( 3 )]
+highlight_mesh_instance = null
+
+[node name="CollisionShape" type="CollisionShape" parent="HingeOrigin/InteractableHinge/Handle3/InteractableHandle"]
+shape = SubResource( 4 )
+
+[node name="Handle4" type="Spatial" parent="HingeOrigin/InteractableHinge"]
+transform = Transform( 1, -3.09086e-08, -7.462e-08, 3.09086e-08, -0.707107, 0.707107, -7.462e-08, -0.707107, -0.707107, 0, -0.141, -0.141 )
+
+[node name="InteractableHandle" parent="HingeOrigin/InteractableHinge/Handle4" instance=ExtResource( 3 )]
+highlight_mesh_instance = null
+
+[node name="CollisionShape" type="CollisionShape" parent="HingeOrigin/InteractableHinge/Handle4/InteractableHandle"]
+shape = SubResource( 4 )
+
+[node name="Handle5" type="Spatial" parent="HingeOrigin/InteractableHinge"]
+transform = Transform( 1, 3.82137e-15, -8.74228e-08, -5.4634e-15, -1, -8.74228e-08, -8.74228e-08, 8.74228e-08, -1, 0, -0.2, 0 )
+
+[node name="InteractableHandle" parent="HingeOrigin/InteractableHinge/Handle5" instance=ExtResource( 3 )]
+highlight_mesh_instance = null
+
+[node name="CollisionShape" type="CollisionShape" parent="HingeOrigin/InteractableHinge/Handle5/InteractableHandle"]
+shape = SubResource( 4 )
+
+[node name="Handle6" type="Spatial" parent="HingeOrigin/InteractableHinge"]
+transform = Transform( 1, 3.09086e-08, -7.462e-08, -3.09086e-08, -0.707107, -0.707107, -7.462e-08, 0.707107, -0.707107, 0, -0.141, 0.141 )
+
+[node name="InteractableHandle" parent="HingeOrigin/InteractableHinge/Handle6" instance=ExtResource( 3 )]
+highlight_mesh_instance = null
+
+[node name="CollisionShape" type="CollisionShape" parent="HingeOrigin/InteractableHinge/Handle6/InteractableHandle"]
+shape = SubResource( 4 )
+
+[node name="Handle7" type="Spatial" parent="HingeOrigin/InteractableHinge"]
+transform = Transform( 1, 4.37114e-08, -4.37114e-08, -4.37114e-08, 5.96046e-08, -1, -4.37114e-08, 1, 5.96046e-08, 0, 0, 0.2 )
+
+[node name="InteractableHandle" parent="HingeOrigin/InteractableHinge/Handle7" instance=ExtResource( 3 )]
+highlight_mesh_instance = null
+
+[node name="CollisionShape" type="CollisionShape" parent="HingeOrigin/InteractableHinge/Handle7/InteractableHandle"]
+shape = SubResource( 4 )
+
+[node name="Handle8" type="Spatial" parent="HingeOrigin/InteractableHinge"]
+transform = Transform( 1, 3.09086e-08, -1.28028e-08, -3.09086e-08, 0.707107, -0.707107, -1.28028e-08, 0.707107, 0.707107, 0, 0.141, 0.141 )
+
+[node name="InteractableHandle" parent="HingeOrigin/InteractableHinge/Handle8" instance=ExtResource( 3 )]
+highlight_mesh_instance = null
+
+[node name="CollisionShape" type="CollisionShape" parent="HingeOrigin/InteractableHinge/Handle8/InteractableHandle"]
+shape = SubResource( 4 )

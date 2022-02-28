@@ -53,9 +53,9 @@ func _hook_child_handles(var node: Node) -> void:
 	var handle := node as XRTInteractableHandle
 	if handle:
 		if handle.connect("picked_up", self, "_on_handle_picked_up"):
-			push_error("Unable to connect joint handle signal")
+			push_error("Unable to connect handle signal")
 		if handle.connect("dropped", self, "_on_handle_dropped"):
-			push_error("Unable to connect joint handle signal")
+			push_error("Unable to connect handle signal")
 
 	# Recurse into all children
 	for child in node.get_children():

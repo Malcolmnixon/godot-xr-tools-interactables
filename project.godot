@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-xr-tools/objects/Wind_area.gd"
 }, {
+"base": "Area",
+"class": "XRTInteractableAreaButton",
+"language": "GDScript",
+"path": "res://addons/godot-xr-tools/interactables/xrt_interactable_area_button.gd"
+}, {
 "base": "XRToolsPickable",
 "class": "XRTInteractableHandle",
 "language": "GDScript",
@@ -129,6 +134,7 @@ _global_script_class_icons={
 "VelocityAverager": "",
 "VelocityAveragerLinear": "",
 "WindArea": "",
+"XRTInteractableAreaButton": "",
 "XRTInteractableHandle": "",
 "XRTInteractableHandleDriven": "",
 "XRTInteractableHinge": "",

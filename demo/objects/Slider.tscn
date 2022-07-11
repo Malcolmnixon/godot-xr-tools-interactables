@@ -75,7 +75,6 @@ material/0 = SubResource( 9 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )
 
 [node name="InteractableHandle" parent="SliderOrigin/InteractableSlider/HandleOrigin" instance=ExtResource( 3 )]
-highlight_mesh_instance = null
 
 [node name="CollisionShape" type="CollisionShape" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
 shape = SubResource( 8 )

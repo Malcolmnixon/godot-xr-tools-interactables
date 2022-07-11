@@ -1,4 +1,30 @@
-# 2.3
+# 2.5.0
+- Added advanced player height control
+- Modified climbing to collapse player to a sphere to allow mounting climbed objects
+- Added crouch movement provider
+- Added example fall damage detection
+- Added moving platform support to player body
+- Modified hands to scale with world_scale (required for godot-openxr 1.3.0 and later)
+
+# 2.4.1
+- Fixed grab distance
+- Fixed snap-zone instance drop and free issue
+- Movement provides react properly when disabled
+- Hiding grapple target when disabled
+
+# 2.4.0
+- Added configuration setting for head height in player body.
+- Added Function_JumpDetect_movement to detect jumping via the players body and/or arms
+- Improved responsiveness of snap-turning
+- Moved flight logic from Function_Direct_movement to Function_Flight_movement
+- Added option to disable player sliding on slopes
+- Added support for remote grabbing
+- Moved turning logic from Function_Direct_movement to Function_Turn_movement
+- Fixed movement provider servicing so disabled/bypassed providers can report their finished events
+- Added grappling movement provider
+- Added snap-zones
+
+# 2.3.0
 - Added vignette
 - Moved player physics into new PlayerBody asset (breaking change)
 - Moved Function_Direct_movement settings for player physics into PlayerBody

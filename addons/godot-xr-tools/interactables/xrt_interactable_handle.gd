@@ -61,9 +61,9 @@ func pick_up(by, with_controller) -> void:
 
 
 # Called when the handle is dropped
-func let_go(_p_linear_velocity = Vector3(), _p_angular_velocity = Vector3()) -> void:
+func let_go(_p_linear_velocity: Vector3, _p_angular_velocity: Vector3) -> void:
 	# Call the base-class to perform the drop, but with no velocity
-	.let_go()
+	.let_go(Vector3.ZERO, Vector3.ZERO)
 
 	# Disable the process function as no-longer held
 	set_process(false)

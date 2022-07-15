@@ -51,6 +51,8 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.2
 
 [node name="InteractableSlider" parent="SliderOrigin" instance=ExtResource( 2 )]
 slider_limit_max = 0.4
+slider_position = 0.2
+default_position = 0.2
 
 [node name="SliderBody" type="StaticBody" parent="SliderOrigin/InteractableSlider"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1 )

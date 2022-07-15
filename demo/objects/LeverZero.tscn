@@ -35,7 +35,7 @@ metallic_specular = 1.0
 [sub_resource type="SphereShape" id=9]
 radius = 0.06
 
-[node name="Lever" type="Spatial"]
+[node name="LeverZero" type="Spatial"]
 
 [node name="Frame" type="StaticBody" parent="."]
 
@@ -49,6 +49,7 @@ material/0 = SubResource( 3 )
 [node name="HingeOrigin" type="Spatial" parent="."]
 
 [node name="InteractableHinge" parent="HingeOrigin" instance=ExtResource( 2 )]
+default_on_release = true
 
 [node name="HingeBody" type="StaticBody" parent="HingeOrigin/InteractableHinge"]
 

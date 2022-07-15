@@ -35,7 +35,7 @@ metallic_specular = 1.0
 [sub_resource type="SphereShape" id=8]
 radius = 0.06
 
-[node name="SliderSnap" type="Spatial"]
+[node name="SliderZero" type="Spatial"]
 
 [node name="Frame" type="StaticBody" parent="."]
 
@@ -51,9 +51,9 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.2
 
 [node name="InteractableSlider" parent="SliderOrigin" instance=ExtResource( 2 )]
 slider_limit_max = 0.4
-slider_steps = 0.1
 slider_position = 0.2
 default_position = 0.2
+default_on_release = true
 
 [node name="SliderBody" type="StaticBody" parent="SliderOrigin/InteractableSlider"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1 )

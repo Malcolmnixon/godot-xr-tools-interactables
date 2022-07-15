@@ -34,12 +34,24 @@ export var slider_steps := 0.0
 ## Slider position
 export var slider_position := 0.0 setget _set_slider_position
 
+## Default position
+export var default_position := 0.0
+
+## Move to default position on release
+export var default_on_release := false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Set the initial position to match the initial slider position value
-	transform = Transform(Basis.IDENTITY, Vector3(slider_position, 0.0, 0.0))
+	transform = Transform(
+		Basis.IDENTITY, 
+		Vector3(slider_position, 0.0, 0.0)
+	)
+
+	# Connect signals
+	if connect("released", self, "_on_slider_released"):
+		push_error("Cannot connect slider released signal")
 
 
 # Called every frame when one or more handles are held by the player
@@ -83,7 +95,14 @@ func move_slider(var position: float) -> void:
 	emit_signal("slider_moved", position)
 
 
+# Handle release of slider
+func _on_slider_released(var _interactable):
+	if default_on_release:
+		move_slider(default_position)
+
+
 # Called when the slider position is set externally
 func _set_slider_position(var position: float) -> void:
 	slider_position = position
-	move_slider(position)
+	if is_inside_tree():
+		move_slider(position)

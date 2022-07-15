@@ -6,13 +6,20 @@ extends Spatial
 ## Interactable Handle Driven script
 ##
 ## @desc:
-##     This is the base class for interactibles driven by handles. It subscribes
+##     This is the base class for interactables driven by handles. It subscribes
 ##     to all child handle picked_up and dropped signals, and maintains a list
 ##     of all grabbed handles.
 ##
 ##     When one or more handles are grabbed, the _process function is enabled
 ##     to process the handle-driven movement.
 ##  
+
+
+## Signal called when this interactable is grabbed
+signal grabbed(interactable)
+
+## Signal called when this interactable is released
+signal released(interactable)
 
 
 # Array of handles currently grabbed
@@ -34,7 +41,12 @@ func _on_handle_picked_up(var handle: XRTInteractableHandle) -> void:
 	grabbed_handles.append(handle)
 
 	# Enable processing
-	set_process(true)
+	if grabbed_handles.size() == 1:
+		# Report grabbed
+		emit_signal("grabbed", self)
+
+		# Enable physics processing
+		set_process(true)
 
 
 # Called when a handle is dropped
@@ -44,7 +56,11 @@ func _on_handle_dropped(var handle: XRTInteractableHandle) -> void:
 
 	# Disable processing when we drop the last handle
 	if grabbed_handles.empty():
+		# Disable physics processing
 		set_process(false)
+
+		# Report released
+		emit_signal("released", self)
 
 
 # Recursive function to hook picked_up and dropped signals in all child handles

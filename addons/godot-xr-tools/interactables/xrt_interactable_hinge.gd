@@ -33,18 +33,32 @@ export var hinge_steps := 0.0 setget _set_hinge_steps
 ## Hinge position
 export var hinge_position := 0.0 setget _set_hinge_position
 
+## Default position
+export var default_position := 0.0 setget _set_default_position
+
+## Move to default position on release
+export var default_on_release := false
+
 
 # Hinge values in radians
 onready var _hinge_limit_min_rad := deg2rad(hinge_limit_min)
 onready var _hinge_limit_max_rad := deg2rad(hinge_limit_max)
 onready var _hinge_steps_rad := deg2rad(hinge_steps)
 onready var _hinge_position_rad := deg2rad(hinge_position)
+onready var _default_position_rad := deg2rad(default_position)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Set the initial position to match the initial hinge position value
-	transform = Transform(Basis(Vector3.RIGHT, _hinge_position_rad), Vector3.ZERO)
+	transform = Transform(
+		Basis(Vector3(_hinge_position_rad, 0, 0)),
+		Vector3.ZERO
+	)
+
+	# Connect signals
+	if connect("released", self, "_on_hinge_released"):
+		push_error("Cannot connect hinge released signal")
 
 
 # Called every frame when one or more handles are held by the player
@@ -68,11 +82,11 @@ func _process(var _delta: float) -> void:
 
 # Move the hinge to the specified position
 func move_hinge(var position: float) -> void:
-	# Apply slider step-quantization
+	# Apply hinge step-quantization
 	if _hinge_steps_rad:
 		position = round(position / _hinge_steps_rad) * _hinge_steps_rad
 
-	# Apply slider limits
+	# Apply hinge limits
 	position = clamp(position, _hinge_limit_min_rad, _hinge_limit_max_rad)
 
 	# Skip if the position has not changed
@@ -84,10 +98,16 @@ func move_hinge(var position: float) -> void:
 	hinge_position = rad2deg(position)
 
 	# Update the transform
-	transform.basis = Basis(Vector3.RIGHT, position)
+	transform.basis = Basis(Vector3(_hinge_position_rad, 0, 0))
 
 	# Emit the moved signal
 	emit_signal("hinge_moved", hinge_position)
+
+
+# Handle release of hinge
+func _on_hinge_released(var _interactable):
+	if default_on_release:
+		move_hinge(_default_position_rad)
 
 
 # Called when hinge_limit_min is set externally
@@ -112,4 +132,11 @@ func _set_hinge_steps(var value: float) -> void:
 func _set_hinge_position(var value: float) -> void:
 	hinge_position = value
 	_hinge_position_rad = deg2rad(value)
-	move_hinge(_hinge_position_rad)
+	if is_inside_tree():
+		move_hinge(_hinge_position_rad)
+
+
+# Called when default_position is set externally
+func _set_default_position(var value: float) -> void:
+	default_position = value
+	_default_position_rad = deg2rad(value)
